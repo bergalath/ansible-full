@@ -1,0 +1,42 @@
+---
+
+- name: Provisionner une nouvelle machine
+  # hosts: dummy_host
+  hosts: all:!localhost
+  become: true
+  vars:
+    ansible_min_version: 2.16
+
+  roles:
+    - role: role_1
+    - role: role_2
+    - role: role_3
+
+  pre_tasks:
+    - name: Vérifier la version de Ansible
+      ansible.builtin.assert:
+        that: ansible_version.full is version_compare('{{ ansible_min_version }}', '>=')
+        msg: Installer au moins la version {{ ansible_min_version }} de Ansible svp !
+      tags: always
+
+    - name: Autres contrôles avant exécution du Playbook
+      when: not ansible_check_mode
+      tags: always
+      block:
+        - name: IPs du serveur
+          ansible.builtin.debug:
+            msg: |
+              IPs par défaut :
+                - {{ ansible_default_ipv4.address }}
+                - {{ ansible_default_ipv6.address }}
+
+        - name: Distribution du serveur
+          ansible.builtin.debug:
+            msg: |
+              Distribution actuelle : {{ ansible_distribution }}
+
+        - name: Vérifier les IPs du serveur avant exécution
+          ansible.builtin.pause:
+            prompt: |
+              Si les IPs sont OK, appuyer sur "⏎" pour continuer.
+              Sinon "Ctrl+c" puis "a" pour annuler !
