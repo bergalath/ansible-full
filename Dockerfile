@@ -7,8 +7,6 @@ FROM python:3.12-alpine
 
 ARG ANSIBLE_VERS=9.7.0
 
-ENV SSH_AUTH_SOCK=/run/ssh-agent
-
 RUN adduser -D ansible && \
     apk --no-cache add ca-certificates openssh-client rsync && \
     pip3 install --no-cache-dir --upgrade cryptography mitogen jmespath \

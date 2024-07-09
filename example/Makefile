@@ -3,7 +3,8 @@
 .SILENT:
 
 full_docker_cmd := docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts \
-	-v $$SSH_AUTH_SOCK:/run/ssh-agent bergalath/ansible-full:2
+	-v $$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent \
+	bergalath/ansible-full:3
 
 ping:
 	$(full_docker_cmd) ansible all -m ansible.builtin.ping -o

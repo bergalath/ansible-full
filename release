@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-IMAGE_NAME=bergalath/ansible-full:2
+IMAGE_NAME=bergalath/ansible-full:3
 
 docker login
 docker build -t $IMAGE_NAME .
