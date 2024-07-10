@@ -10,7 +10,7 @@ ping:
 	$(full_docker_cmd) ansible all -m ansible.builtin.ping -o
 
 lint:
-	$(full_docker_cmd) ansible-lint .
+	$(full_docker_cmd) ansible-lint --offline -p /playbook /playbook/roles
 
 test:
 	$(full_docker_cmd) ansible-playbook ./main.yml --check --diff
