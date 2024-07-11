@@ -5,15 +5,14 @@
 
 FROM alpine:3.20
 
-RUN apk --update --no-cache add ca-certificates openssh-client rsync sshpass \
-      python3 py3-cryptography py3-pip py3-yaml && \
+RUN apk --update --no-cache add ca-certificates openssh-client rsync \
+      python3 py3-cryptography py3-pip && \
     rm -rf /usr/lib/python*/EXTERNALLY-MANAGED
 
 ARG ANSIBLE_VERS=9.7.0
 
-RUN apk --update --no-cache add --virtual .build-deps build-base libffi-dev python3-dev && \
-    pip install --no-cache-dir --upgrade --no-binary cffi ansible==${ANSIBLE_VERS} ansible-lint mitogen && \
-    apk del .build-deps && rm -rf /var/cache/apk/* && \
+RUN pip install --no-cache-dir --upgrade mitogen \
+      ansible==${ANSIBLE_VERS} ansible-core ansible-lint && \
     find /usr/lib/ -name '__pycache__' -print0 | xargs -0 -n1 rm -rf && \
     find /usr/lib/ -name '*.pyc' -print0 | xargs -0 -n1 rm -rf
 
