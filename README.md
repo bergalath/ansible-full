@@ -1,6 +1,6 @@
 ## [ansible-full](https://hub.docker.com/r/bergalath/ansible-full)
 
-Minimal Docker image with [ansible](https://docs.ansible.com/ansible/latest/), [ansible-lint](https://ansible.readthedocs.io/projects/lint/), [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html) and [more to come ?](https://github.com/fboender/ansible-cmdb)
+Minimal Docker image with [ansible](https://docs.ansible.com/ansible/latest/), [ansible-lint](https://ansible.readthedocs.io/projects/lint/), [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html) (shamelessly [patched for ansible 2.17](https://github.com/mitogen-hq/mitogen/pull/1082)) and [more to come ?](https://github.com/fboender/ansible-cmdb)
 
 ## Usage
 
