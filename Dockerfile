@@ -9,6 +9,7 @@ RUN adduser -D -u 1000 ansible && \
     python -m pip install --no-cache-dir --upgrade mitogen ansible==${ANSIBLE_VERS} ansible-core ansible-lint \
         git+https://github.com/dirks/ansible-cmdb.git@replace-imp && \
     wget https://patch-diff.githubusercontent.com/raw/mitogen-hq/mitogen/pull/1082.patch -O - | patch -d /usr/lib/python3.12/site-packages/ansible_mitogen && \
+    sed -i -e 's/re.match("/re.match(r"/g' /usr/lib/python3.12/site-packages/ansiblecmdb/parser.py && \
     find /usr/lib/ -name '__pycache__' -print0 | xargs -0 -n1 rm -rf && \
     find /usr/lib/ -name '*.pyc' -print0 | xargs -0 -n1 rm -rf && \
     apk del .build-deps && rm -rf /var/cache/apk/* /tmp
