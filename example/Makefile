@@ -4,7 +4,7 @@
 
 full_docker_cmd := docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts \
 	-v $$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent \
-	bergalath/ansible-full:6
+	bergalath/ansible-full:7
 
 ping:
 	$(full_docker_cmd) ansible all -m ansible.builtin.ping -o
@@ -20,3 +20,6 @@ shell:
 
 run:
 	$(full_docker_cmd) ansible-playbook ./main.yml
+
+facts: # Probably not working as is
+	$(full_docker_cmd) ansible-cmdb -f /facts [-t /facts/markdown.tpl] > /facts/overview.md
