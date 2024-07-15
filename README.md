@@ -43,3 +43,16 @@ docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts \
 Yeah, it’s a bit tedious, so take a look at this minimal [Makefile](example/Makefile)
 
 Happy Ansiblin’ with mitogen speed !
+
+## Ansible 2.16 (9.7.0) image
+
+> [!WARNING]
+> [ansible 2.17 dropped support for python < 3 on managed nodes](https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix)
+
+Another image, bergalath/ansible-full:2.16, is availabe with
+
+- python 3.12
+- ansible 2.16 (9.7.0)
+- [ansible-lint](https://ansible.readthedocs.io/projects/lint/)
+- [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html) (not patched)
+- [ansible-cmdb](https://github.com/fboender/ansible-cmdb) (shamelessly using [@dirks](https://github.com/dirks)’s [fork with python 3.12 support](https://github.com/dirks/ansible-cmdb/tree/replace-imp))
