@@ -17,4 +17,6 @@ RUN adduser -D -u 1000 ansible && \
 
 WORKDIR /playbook
 
+ENV SSH_AUTH_SOCK=/run/ssh-agent
+
 CMD [ "ansible-playbook", "--version" ]
