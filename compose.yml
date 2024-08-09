@@ -1,0 +1,14 @@
+---
+name: chef
+
+services:
+  chef:
+    image: ansible-full:10.2
+    build:
+      args:
+        USER:
+    hostname: chef
+    volumes:
+      - $SSH_AUTH_SOCK:/run/ssh-agent:ro
+      - ./facts:/facts
+      - ./example/playbook:/playbook
