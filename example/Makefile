@@ -4,7 +4,7 @@
 
 full_docker_cmd := docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts \
 	-v $$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent \
-	bergalath/ansible-full:2.17-3
+	bergalath/ansible-full:2.17-4
 
 ping:
 	$(full_docker_cmd) ansible all -m ansible.builtin.ping -o
