@@ -2,11 +2,11 @@
 
 Minimal Docker image with
 
-- python 3.12
-- [ansible 2.17 (10.1.0)](https://docs.ansible.com/ansible/latest/)
+- python 3.1x
+- [ansible 2.17 (10.x)](https://docs.ansible.com/ansible/latest/)
 - [ansible-lint](https://ansible.readthedocs.io/projects/lint/)
-- [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html) (shamelessly [patched for ansible 2.17](https://github.com/mitogen-hq/mitogen/pull/1082))
-- [ansible-cmdb](https://github.com/fboender/ansible-cmdb) (shamelessly using [@dirks](https://github.com/dirks)’s [fork with python 3.12 support](https://github.com/dirks/ansible-cmdb/tree/replace-imp))
+- [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html)
+- [ansible-cmdb](https://github.com/fboender/ansible-cmdb) (shamelessly using [@dirks](https://github.com/dirks)’s [fork with python 3.12+ support](https://github.com/dirks/ansible-cmdb/tree/replace-imp))
 
 ## Usage
 
@@ -35,9 +35,8 @@ project
 Then this command will run your Playbook, in **check mode** by default, in a new container
 
 ```bash
-docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts \
-  -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent \
-  bergalath/ansible-full:2.17-3 ansible-playbook ./main.yml --check --diff
+docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts -v $SSH_AUTH_SOCK:/run/ssh-agent \
+  bergalath/ansible-full:2.17-4 ansible-playbook ./main.yml --check --diff
 ```
 
 Yeah, it’s a bit tedious, so take a look at this minimal [Makefile](example/Makefile)
@@ -54,5 +53,5 @@ Another image, bergalath/ansible-full:2.16, is availabe with
 - python 3.12
 - ansible 2.16 (9.7.0)
 - [ansible-lint](https://ansible.readthedocs.io/projects/lint/)
-- [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html) (not patched)
+- [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html)
 - [ansible-cmdb](https://github.com/fboender/ansible-cmdb) (shamelessly using [@dirks](https://github.com/dirks)’s [fork with python 3.12 support](https://github.com/dirks/ansible-cmdb/tree/replace-imp))

@@ -13,7 +13,7 @@ lint:
 test:
 	$(cmp_cmd) ansible-playbook ./main.yml --check --diff
 
-shell:
+launch:
 	$(cmp_cmd) sh
 
 run:
@@ -21,3 +21,9 @@ run:
 
 facts: # Probably not working as is
 	$(cmp_cmd) ansible-cmdb -f /facts [-t /facts/markdown.tpl] > /facts/overview.md
+
+release: IMAGE_NAME := bergalath/ansible-full:2.17-4
+release:
+	docker login
+	docker build -t $(IMAGE_NAME) .
+	docker push $(IMAGE_NAME)

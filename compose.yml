@@ -3,7 +3,7 @@ name: chef
 
 services:
   chef:
-    image: ansible-full:10.2
+    image: ansible-full:10.3
     build:
       args:
         USER:
