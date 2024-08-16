@@ -36,7 +36,7 @@ Then this command will run your Playbook, in **check mode** by default, in a new
 
 ```bash
 docker run -it --rm -v ./playbook:/playbook -v ./facts:/facts -v $SSH_AUTH_SOCK:/run/ssh-agent \
-  bergalath/ansible-full:2.17-4 ansible-playbook ./main.yml --check --diff
+  bergalath/ansible-full:2.17-5 ansible-playbook ./main.yml --check --diff
 ```
 
 Yeah, it’s a bit tedious, so take a look at this minimal [Makefile](example/Makefile)

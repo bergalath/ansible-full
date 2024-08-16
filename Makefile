@@ -22,7 +22,7 @@ run:
 facts: # Probably not working as is
 	$(cmp_cmd) ansible-cmdb -f /facts [-t /facts/markdown.tpl] > /facts/overview.md
 
-release: IMAGE_NAME := bergalath/ansible-full:2.17-4
+release: IMAGE_NAME := bergalath/ansible-full:2.17-5
 release:
 	docker login
 	docker build -t $(IMAGE_NAME) .
