@@ -1,0 +1,15 @@
+FROM debian:bookworm-slim AS builder
+
+ADD --chmod=755 https://github.com/rbenv/ruby-build/raw/master/bin/ruby-build /usr/local/bin/
+ADD https://github.com/rbenv/ruby-build/raw/master/share/ruby-build/2.4.10 /usr/local/share/ruby-build/
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        autoconf build-essential ca-certificates curl patch \
+        libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev && \
+    /usr/local/bin/ruby-build /usr/local/share/ruby-build/2.4.10 /usr/local/rubies/2.4.10 -- --disable-install-doc
+
+FROM debian:bookworm-slim
+COPY --from=builder /usr/local/rubies/ /usr/local/rubies/
+RUN apt-get update && apt-get install -y --no-install-recommends libyaml-dev libreadline6-dev libncurses5-dev && \
+    install -p /usr/local/rubies/2.4.10/bin/* /usr/local/bin
+CMD [ "bash" ]

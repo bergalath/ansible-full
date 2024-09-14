@@ -4,6 +4,9 @@
 
 cmp_cmd := docker compose run -it --rm chef
 
+help:
+	sed -nr 's/^(\w+):$$/\1/p' $(MAKEFILE_LIST)
+
 ping:
 	$(cmp_cmd) ansible all -m ansible.builtin.ping -o
 
